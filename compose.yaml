@@ -1,0 +1,45 @@
+name: ablette
+
+services:
+  db:
+    image: postgres:17.11-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ablette}
+      POSTGRES_USER: ${POSTGRES_USER:-ablette}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate .env with scripts/init-dev-env.ps1 first}
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SERVER_ADDRESS: 0.0.0.0
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-ablette}
+      DB_USER: ${POSTGRES_USER:-ablette}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:?Generate .env with scripts/init-dev-env.ps1 first}
+    ports:
+      - "127.0.0.1:${API_PORT:-8080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "127.0.0.1:${APP_PORT:-8081}:8080"
+    depends_on:
+      - backend
+
+volumes:
+  postgres-data:
