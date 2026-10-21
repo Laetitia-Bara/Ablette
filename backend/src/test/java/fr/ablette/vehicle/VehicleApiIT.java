@@ -2,6 +2,8 @@ package fr.ablette.vehicle;
 
 import java.util.UUID;
 
+import com.jayway.jsonpath.JsonPath;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +66,14 @@ class VehicleApiIT {
                 .andReturn();
 
         String location = creation.getResponse().getHeader("Location");
+        String createdAt = JsonPath.read(creation.getResponse().getContentAsString(), "$.createdAt");
         UUID id = UUID.fromString(location.substring(location.lastIndexOf('/') + 1));
         assertThat(jdbc.queryForObject("SELECT current_mileage FROM vehicles WHERE id = ?", Integer.class, id))
                 .isEqualTo(85000);
 
         api.perform(get(location)).andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id.toString()))
+                .andExpect(jsonPath("$.createdAt").value(createdAt))
                 .andExpect(jsonPath("$.fuel").value("DIESEL"));
         api.perform(get("/api/v1/vehicles")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].id").value(id.toString()));

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.ArgumentCaptor;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,6 +57,21 @@ class VehicleServiceTest {
 
         assertThat(result.year()).isEqualTo(2027);
         assertThat(result.currentMileage()).isZero();
+    }
+
+    @Test
+    void normalizesTimestampToPostgresqlMicrosecondPrecisionBeforePersisting() {
+        service = new VehicleService(repository,
+                Clock.fixed(Instant.parse("2026-10-21T18:59:03.825061500Z"), ZoneOffset.UTC));
+        when(repository.saveAndFlush(any(Vehicle.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        VehicleResponse result = service.create(request(2018, 85000));
+
+        ArgumentCaptor<Vehicle> savedVehicle = ArgumentCaptor.forClass(Vehicle.class);
+        verify(repository).saveAndFlush(savedVehicle.capture());
+        Instant expected = Instant.parse("2026-10-21T18:59:03.825061Z");
+        assertThat(savedVehicle.getValue().getCreatedAt()).isEqualTo(expected);
+        assertThat(result.createdAt()).isEqualTo(expected);
     }
 
     @Test

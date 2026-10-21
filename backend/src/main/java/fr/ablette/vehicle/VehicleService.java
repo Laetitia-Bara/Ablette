@@ -2,6 +2,7 @@ package fr.ablette.vehicle;
 
 import java.time.Clock;
 import java.time.Year;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +39,7 @@ public class VehicleService {
             throw new InvalidVehicleException("year", "L'année ne doit pas dépasser " + lastAllowedYear + ".");
         }
         Vehicle vehicle = new Vehicle(request.nickname(), request.brand(), request.model(), request.year(),
-                request.engine(), request.fuel(), request.currentMileage(), clock.instant());
+                request.engine(), request.fuel(), request.currentMileage(), clock.instant().truncatedTo(ChronoUnit.MICROS));
         return VehicleResponse.from(repository.saveAndFlush(vehicle));
     }
 }
