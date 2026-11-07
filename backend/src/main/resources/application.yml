@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ablette-api
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ablette}
+    username: ${DB_USER:ablette}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+      accept-float-as-int: false
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8080}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true

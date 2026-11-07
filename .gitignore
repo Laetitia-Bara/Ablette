@@ -1,3 +1,21 @@
+# Ablette 2.0: local configuration, build products and tools
+.env
+.env.*
+!.env.example
+*.key
+*.p12
+*.jks
+**/target/
+**/node_modules/
+**/dist/
+**/coverage/
+**/playwright-report/
+**/test-results/
+*.tsbuildinfo
+.tools/
+.local/
+
+# Original prototype exclusions are retained below.
 # Miscellaneous
 *.class
 *.log

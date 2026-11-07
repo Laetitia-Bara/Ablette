@@ -1,0 +1,813 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+a {
+  color: inherit;
+}
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #8fbc73;
+  outline-offset: 4px;
+}
+.skip-link {
+  position: fixed;
+  left: 20px;
+  top: -80px;
+  background: white;
+  padding: 12px;
+  z-index: 10;
+}
+.skip-link:focus {
+  top: 12px;
+}
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 248px;
+  background: #193f35;
+  color: #f5f6ed;
+  padding: 39px 25px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+.brand-dot {
+  color: #d1df96;
+}
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #64806d;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dce7b1;
+}
+.brand-icon svg {
+  font-size: 22px;
+}
+.sidebar .nav-label {
+  font-size: 10px;
+  letter-spacing: 1.7px;
+  color: #a8bdb0;
+  margin: 63px 13px 16px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  min-height: 50px;
+  border-radius: 11px;
+  padding: 13px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #315548;
+  color: #edf2df;
+}
+.nav-item svg {
+  color: #d9e7b1;
+}
+.sidebar-note {
+  margin-top: auto;
+  padding: 25px 12px 4px;
+}
+.note-line {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: #c5d78e;
+  border-radius: 5px;
+}
+.sidebar-note p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #c0d0c4;
+  margin: 18px 0;
+}
+.sidebar-note strong {
+  font-weight: 500;
+  color: #f6f7ed;
+}
+.note-caption {
+  font-size: 8px;
+  letter-spacing: 1.8px;
+  color: #9fb6a6;
+}
+.workspace {
+  margin-left: 248px;
+  width: calc(100% - 248px);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 5.5%;
+  border-bottom: 1px solid #e1e7db;
+  background: #fafbf6;
+}
+.desktop-crumb {
+  font-size: 12px;
+  color: #7b897e;
+}
+.desktop-crumb span {
+  margin: 0 15px;
+  color: #a9b4a8;
+}
+.desktop-crumb strong {
+  font-weight: 500;
+  color: #314b3d;
+}
+.garage-label {
+  font-size: 11px;
+  color: #6f7e70;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.garage-label > span {
+  height: 6px;
+  width: 6px;
+  background: #7e9e67;
+  border-radius: 50%;
+}
+.mobile-brand {
+  display: none;
+}
+.page-content {
+  padding: 55px 5.5% 36px;
+  max-width: 1520px;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  flex: 1;
+}
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 44px;
+}
+.eyebrow.MuiTypography-root {
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  font-weight: 650;
+  color: #718169;
+  margin-bottom: 13px;
+}
+.title-dot {
+  color: #82a060;
+}
+.page-description.MuiTypography-root {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.add-vehicle.MuiButton-root {
+  flex-shrink: 0;
+  font-size: 13px;
+}
+.plus {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  margin-right: 9px;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 17px;
+}
+.section-heading h2 {
+  font-size: 14px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.count-badge {
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 23px;
+  min-width: 23px;
+  border-radius: 7px;
+  background: #e3e8d8;
+  color: #536c43;
+  padding: 0 6px;
+}
+.section-heading > span {
+  font-size: 11px;
+  color: #89917f;
+}
+.empty-garage {
+  border: 1px solid #e1e6da;
+  border-radius: 18px !important;
+  min-height: 408px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 37px 24px;
+  background: linear-gradient(135deg, #fff 60%, #fafcf5);
+}
+.empty-illustration {
+  position: relative;
+  width: 110px;
+  height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 17px;
+}
+.empty-illustration svg {
+  color: #426347;
+  font-size: 55px;
+  position: relative;
+  z-index: 1;
+}
+.illustration-ring {
+  position: absolute;
+  width: 89px;
+  height: 89px;
+  background: #f0f3e5;
+  border-radius: 50%;
+  border: 1px solid #e1e9d4;
+}
+.empty-garage h3 {
+  font-size: 22px;
+  letter-spacing: -0.6px;
+}
+.empty-description.MuiTypography-root {
+  font-size: 13px;
+  line-height: 1.85;
+  margin: 12px 0 25px;
+}
+.empty-garage .MuiButton-root {
+  font-size: 12px;
+  min-height: 46px;
+}
+.empty-caption {
+  font-size: 10px;
+  color: #87927d;
+  margin-top: 16px;
+}
+.garage-footnote {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 27px;
+  padding: 4px 2px;
+  color: #6e7f67;
+}
+.garage-footnote > span {
+  font-size: 20px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e9eedf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.garage-footnote p {
+  font-size: 11px;
+  line-height: 1.9;
+  margin: 0;
+}
+.garage-footnote strong {
+  font-weight: 400;
+  color: #8a9482;
+}
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid #e1e7db;
+  margin: 0 5.5%;
+  padding: 21px 0;
+  color: #89947e;
+  font-size: 10px;
+}
+.page-footer > span:first-child {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.vehicle-card {
+  padding: 24px;
+  border: 1px solid #e0e6da;
+  border-radius: 17px !important;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.vehicle-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.vehicle-emblem {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  color: #40614b;
+  background: #edf1e5;
+  flex-shrink: 0;
+}
+.fuel-chip.MuiChip-root {
+  background: #f2f4ec;
+  color: #587047;
+  font-size: 10px;
+  border: 1px solid #e6ebdf;
+  height: 26px;
+}
+.vehicle-name.MuiTypography-root {
+  font-size: 20px;
+  font-weight: 650;
+  margin-bottom: 7px;
+}
+.vehicle-subtitle.MuiTypography-root {
+  font-size: 12px;
+  line-height: 1.65;
+}
+.vehicle-mileage {
+  padding: 21px 0 18px;
+  margin-top: 16px;
+  border-top: 1px solid #edf0e8;
+  border-bottom: 1px solid #edf0e8;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.metric-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.25px;
+  color: #839076;
+}
+.vehicle-mileage strong {
+  font-size: 29px;
+  line-height: 1.25;
+  letter-spacing: -1px;
+  font-weight: 600;
+}
+.vehicle-mileage small {
+  font-size: 13px;
+  color: #7b8b70;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.vehicle-facts {
+  margin: 17px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.vehicle-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 11px;
+}
+.vehicle-facts dt {
+  color: #87917e;
+}
+.vehicle-facts dd {
+  margin: 0;
+  color: #4b6048;
+  text-align: right;
+}
+.status-panel {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+.status-panel p {
+  font-size: 14px;
+}
+.page-alert {
+  margin-bottom: 24px;
+}
+.form-page {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.back-button.MuiButton-root {
+  padding-left: 0;
+  min-height: 40px;
+  font-size: 12px;
+  color: #63785d;
+  margin-bottom: 21px;
+}
+.back-button span {
+  font-size: 19px;
+  margin-right: 10px;
+}
+.form-heading {
+  margin-bottom: 31px;
+}
+.form-heading h1 {
+  font-size: 35px;
+}
+.vehicle-form-paper {
+  padding: 33px;
+  border: 1px solid #e0e6da;
+  border-radius: 18px !important;
+}
+.form-intro {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 28px;
+  margin-bottom: 31px;
+  border-bottom: 1px solid #e9ede3;
+}
+.form-intro h2 {
+  font-size: 17px;
+  margin-bottom: 7px;
+}
+.form-intro p {
+  font-size: 11px;
+}
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px 24px;
+}
+.full-width {
+  grid-column: 1/-1;
+}
+.form-fields .MuiInputLabel-root {
+  font-size: 14px;
+}
+.form-fields .MuiInputBase-input {
+  font-size: 15px;
+}
+.form-fields .MuiFormHelperText-root {
+  font-size: 11px;
+  margin-top: 6px;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-top: 28px;
+  margin-top: 29px;
+  border-top: 1px solid #e9ede3;
+}
+.form-actions .MuiButton-root {
+  font-size: 13px;
+}
+.form-note {
+  text-align: center;
+  font-size: 11px;
+  color: #87927e;
+  margin: 22px 0 0;
+}
+.form-error {
+  margin-bottom: 26px;
+}
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+}
+.not-found p {
+  color: #64746c;
+}
+@media (min-width: 1600px) {
+  .page-content {
+    padding-top: 65px;
+  }
+  .empty-garage {
+    min-height: 450px;
+  }
+}
+@media (max-width: 1199px) {
+  .sidebar {
+    width: 210px;
+    padding: 34px 20px;
+  }
+  .workspace {
+    margin-left: 210px;
+    width: calc(100% - 210px);
+  }
+  .vehicle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .page-heading {
+    align-items: flex-start;
+  }
+  .page-heading h1 {
+    font-size: 36px;
+  }
+  .page-content {
+    padding-top: 40px;
+  }
+  .add-vehicle.MuiButton-root {
+    padding: 11px 14px;
+    font-size: 12px;
+  }
+  .form-heading h1 {
+    font-size: 31px;
+  }
+}
+@media (max-width: 899px) {
+  .sidebar {
+    display: none;
+  }
+  .workspace {
+    margin-left: 0;
+    width: 100%;
+  }
+  .mobile-brand {
+    display: block;
+  }
+  .mobile-brand .brand {
+    color: #193f35;
+    font-size: 27px;
+    gap: 9px;
+  }
+  .mobile-brand .brand-icon {
+    background: #193f35;
+    border: none;
+    width: 33px;
+    height: 33px;
+    border-radius: 10px;
+  }
+  .mobile-brand .brand-dot {
+    color: #86a266;
+  }
+  .desktop-crumb {
+    display: none;
+  }
+  .topbar {
+    height: 78px;
+    padding: 0 5%;
+  }
+  .page-content {
+    padding: 38px 5% 35px;
+  }
+  .page-heading {
+    align-items: center;
+    margin-bottom: 35px;
+  }
+  .vehicle-grid {
+    gap: 18px;
+  }
+  .page-footer {
+    margin: 0 5%;
+  }
+  .form-heading h1 {
+    font-size: 33px;
+  }
+  .vehicle-form-paper {
+    padding: 28px;
+  }
+}
+@media (max-width: 599px) {
+  .topbar {
+    height: 70px;
+    padding: 0 22px;
+  }
+  .garage-label {
+    display: none;
+  }
+  .page-content {
+    padding: 32px 22px 30px;
+  }
+  .page-heading {
+    display: block;
+    margin-bottom: 31px;
+  }
+  .eyebrow.MuiTypography-root {
+    font-size: 9px;
+    letter-spacing: 1.6px;
+    margin-bottom: 12px;
+  }
+  .page-heading h1 {
+    font-size: 37px;
+  }
+  .page-description.MuiTypography-root {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .add-vehicle.MuiButton-root {
+    margin-top: 22px;
+    width: 100%;
+    font-size: 13px;
+    min-height: 50px;
+  }
+  .section-heading {
+    margin-bottom: 14px;
+  }
+  .section-heading h2 {
+    font-size: 13px;
+  }
+  .section-heading > span {
+    display: none;
+  }
+  .empty-garage {
+    padding: 28px 20px;
+    min-height: 376px;
+  }
+  .empty-garage h3 {
+    font-size: 21px;
+    line-height: 1.35;
+  }
+  .empty-description.MuiTypography-root {
+    font-size: 12px;
+    margin-bottom: 23px;
+  }
+  .empty-garage .MuiButton-root {
+    width: 100%;
+    font-size: 11px;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-height: 49px;
+  }
+  .empty-caption {
+    font-size: 9px;
+    line-height: 1.7;
+    max-width: 200px;
+  }
+  .desktop-break {
+    display: none;
+  }
+  .garage-footnote {
+    gap: 11px;
+    margin-top: 22px;
+  }
+  .garage-footnote p {
+    font-size: 10px;
+  }
+  .garage-footnote strong {
+    line-height: 1.5;
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .page-footer {
+    margin: 0 22px;
+    padding: 19px 0;
+    font-size: 9px;
+  }
+  .page-footer > span:last-child {
+    max-width: 185px;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .vehicle-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .vehicle-card {
+    padding: 24px;
+  }
+  .vehicle-card-top {
+    margin-bottom: 21px;
+  }
+  .vehicle-mileage strong {
+    font-size: 31px;
+  }
+  .vehicle-name.MuiTypography-root {
+    font-size: 21px;
+  }
+  .vehicle-subtitle.MuiTypography-root {
+    font-size: 13px;
+  }
+  .vehicle-facts > div {
+    font-size: 12px;
+  }
+  .vehicle-mileage {
+    margin-top: 18px;
+  }
+  .status-panel {
+    min-height: 260px;
+    gap: 12px;
+  }
+  .status-panel p {
+    font-size: 12px;
+  }
+  .page-alert.MuiAlert-root {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .page-alert .MuiAlert-action {
+    margin-left: auto;
+    padding-left: 0;
+  }
+  .back-button.MuiButton-root {
+    margin-bottom: 21px;
+    min-height: 44px;
+  }
+  .form-heading {
+    margin-bottom: 26px;
+  }
+  .form-heading h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    max-width: 300px;
+  }
+  .vehicle-form-paper {
+    padding: 24px 18px;
+  }
+  .form-intro {
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 29px;
+    padding-bottom: 24px;
+  }
+  .form-intro h2 {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .form-intro p {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .form-intro .vehicle-emblem {
+    width: 37px;
+    height: 37px;
+    border-radius: 11px;
+  }
+  .form-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .form-fields .MuiInputBase-input {
+    font-size: 16px;
+  }
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 7px;
+    padding-top: 24px;
+    margin-top: 25px;
+  }
+  .form-actions .MuiButton-root {
+    width: 100%;
+    min-height: 49px;
+  }
+  .form-note {
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .not-found h1 {
+    font-size: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
